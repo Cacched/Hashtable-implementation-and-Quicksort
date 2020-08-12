@@ -37,8 +37,8 @@ int main()
 	Hashtable freqHt(htsize); // Hashtable object
 	vector<pair<string, int>> freqVec; 
 	vector<string> words; // Vector to store all the words read in from the file.
-  bool readAnother = true;
-  readFile(freqVec,freqHt);
+  	bool readAnother = true;
+  	readFile(freqVec,freqHt);
 	cout << "\nHash table:";
 	freqHt.print();
 
@@ -64,14 +64,14 @@ int main()
 	string word;
 	while (true)
 	{
-    cout << "\nType 'quit' to end the search or 'another' to read in another file!";
+   		 cout << "\nType 'quit' to end the search or 'another' to read in another file!";
 		cout << "\nEnter a word to search for: ";
 		cin >> word;
 		if (word == "quit") break;
-    else if (word == "another")
-    {
-      readFile(freqVec,freqHt);
-    }
+    		else if (word == "another")
+    		{
+      		  readFile(freqVec,freqHt);
+    		}
 
 		int freq = freqHt.get(word);
 		int freq2 = -1; 
@@ -96,18 +96,18 @@ void readFile(vector<pair<string,int>>&dstVec,Hashtable&dstHt)
 	vector<string> words; // Vector to store all the words read in from the file.
 
 	string filename, line;
-  cout << "\nType 'quit' to end the search"<<endl;
+  	cout << "\nType 'quit' to end the search"<<endl;
 	cout << "What filename do you want to read? ";
 	cin >> filename;
 	ifstream infile(filename);
-  if(filename == "quit") 
-  {
-    exit(0);
-  }
-  else if (infile.fail())
+  	if(filename == "quit") 
+  	{
+   	  exit(0);
+  	}
+  	else if (infile.fail())
 	{
-		cout << "Could not open file." << endl;
-		exit(0);
+	   cout << "Could not open file." << endl;
+	   exit(0);
 	}
 
 	while (getline(infile, line))
