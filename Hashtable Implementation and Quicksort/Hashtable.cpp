@@ -3,15 +3,11 @@
 * Programmer : Shaantanu Sharma
 *
 * Due Date : Monday, 16 April 2018, 11: 59 PM
-*
-* COMP241, Spring 2018
-*
-* Pledge : I have neither given nor received unauthorized aid
-*         on this program.
+* 
 *
 * Description : The following code is the implementation of a HashTable and a Quicksort algorithm. The project is based
 around reading in a text file and counting how often each word occurs
-(similar to the movie reviews project).
+*
 */
 #include <iostream>
 #include "Hashtable.h"
@@ -56,7 +52,7 @@ void Hashtable::put(string key)
 }
 /*Function : get(string key)
 --------------------
-A function that returns the frequency of the word in the table.
+A function that returns the frequency(no of times seen in the file) of the word in the table.
 Returns : return the associated frequency, or -1 if not found.
 */
 int Hashtable::get(string key)
@@ -104,7 +100,7 @@ void Hashtable::print()
 }
 /*Function : hash(s)
 --------------------
-A function that prints out all the data in the table.
+A simple hash function that calculates the position in the table to store a value.
 Returns : An integer representing a slot in the Hashtable, where new entries can be stored.
 */
 int Hashtable::hash(string s)
