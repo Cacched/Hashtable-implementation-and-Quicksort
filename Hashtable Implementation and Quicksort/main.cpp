@@ -16,15 +16,15 @@
 
 using namespace std;
 
-// Function declarations for Split,Quicksort and Binary search
+// Function declarations for Split,Quicksort,Reading file input and Binary search
 vector<string> split(const string &s, char delim); 
 int DivAux(vector<pair<string, int>> &unst, int top, int bot);
 void Quicksort(vector<pair<string, int>>& inpt, int fst, int lst);
 int binarySearch(vector<pair<string, int>>& inpt, int l, int r, string x);
-
+void readFile(vector<pair<string,int>>&dstVec,Hashtable&dstHt);
 /*Function : main()
 --------------------
-Main part of the code, calls all the other function.Initializes the Hashtable and processes command from input file.Initializes Hashtable object
+Main part of the code, calls all the other function.Initializes the Hashtable and the Hashtable object
 for different functions to be implemented.
 Returns : none
 */
@@ -37,50 +37,8 @@ int main()
 	Hashtable freqHt(htsize); // Hashtable object
 	vector<pair<string, int>> freqVec; 
 	vector<string> words; // Vector to store all the words read in from the file.
-
-	string filename, line;
-	cout << "What filename do you want to read? ";
-	cin >> filename;
-	ifstream infile(filename);
-	if (infile.fail())
-	{
-		cout << "Could not open file." << endl;
-		exit(0);
-	}
-
-	while (getline(infile, line))
-	{
-		int ctr = 0;
-		words = split(line, ' ');
-		for (int x = 0; x < words.size(); x++)
-		{
-			string word = words[x];
-			freqHt.put(word);
-			{
-				bool state = false;
-				for (pair<string, int>& p : freqVec)
-				{
-
-					if (p.first == word)
-					{
-						p.second++;
-						state = true;
-					}
-
-				}
-				if (!state)
-				{
-					pair<string, int> AddPair(word, 1);
-					freqVec.push_back(AddPair);
-				}
-
-			}
-		}
-		
-
-	}
-	infile.close();
-
+  bool readAnother = true;
+  readFile(freqVec,freqHt);
 	cout << "\nHash table:";
 	freqHt.print();
 
@@ -106,9 +64,14 @@ int main()
 	string word;
 	while (true)
 	{
+    cout << "\nType 'quit' to end the search or 'another' to read in another file!";
 		cout << "\nEnter a word to search for: ";
 		cin >> word;
 		if (word == "quit") break;
+    else if (word == "another")
+    {
+      readFile(freqVec,freqHt);
+    }
 
 		int freq = freqHt.get(word);
 		int freq2 = -1; 
@@ -119,6 +82,69 @@ int main()
 	}
 	return 0;
 }
+
+
+/*Function : readFile(vector<pair<string,int>>&dstVec,Hashtable&dstHt)
+--------------------
+Reads in the input file and stores the words along with its frequency in the Hashtable and Vector.
+Takes in a Vector and Hashtable object as parameters.
+Returns : none
+*/
+void readFile(vector<pair<string,int>>&dstVec,Hashtable&dstHt)
+{
+
+	vector<string> words; // Vector to store all the words read in from the file.
+
+	string filename, line;
+  cout << "\nType 'quit' to end the search"<<endl;
+	cout << "What filename do you want to read? ";
+	cin >> filename;
+	ifstream infile(filename);
+  if(filename == "quit") 
+  {
+    exit(0);
+  }
+  else if (infile.fail())
+	{
+		cout << "Could not open file." << endl;
+		exit(0);
+	}
+
+	while (getline(infile, line))
+	{
+		int ctr = 0;
+		words = split(line, ' ');
+		for (int x = 0; x < words.size(); x++)
+		{
+			string word = words[x];
+			dstHt.put(word);
+			{
+				bool state = false;
+				for (pair<string, int>& p : dstVec)
+				{
+
+					if (p.first == word)
+					{
+						p.second++;
+						state = true;
+					}
+
+				}
+				if (!state)
+				{
+					pair<string, int> AddPair(word, 1);
+					dstVec.push_back(AddPair);
+				}
+
+			}
+		}
+		
+
+	}
+	infile.close();
+
+} 
+
 /*Function : binarySearch(vector<pair<string, int>>& inpt, int l, int r, string x)
 ----------------------------------------------------------------------------------
 Binary search function to search for a word in the Hashtable and vector.
