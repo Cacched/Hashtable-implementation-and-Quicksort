@@ -2,16 +2,12 @@
 * Program or Lab #: HashTables and Quicksort.
 * Programmer : Shaantanu Sharma
 *
-* Due Date : Monday, 16 April 2018, 11: 59 PM
+* Date : Monday, 16 April 2018, 11: 59 PM
 *
-* COMP241, Spring 2018
-*
-* Pledge : I have neither given nor received unauthorized aid
-*         on this program.
 *
 * Description : The following code is the implementation of a HashTable and a Quicksort algorithm. The project is based
 around reading in a text file and counting how often each word occurs
-(similar to the movie reviews project).
+
 */
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
