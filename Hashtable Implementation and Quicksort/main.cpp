@@ -4,14 +4,10 @@
 *
 * Due Date : Monday, 16 April 2018, 11: 59 PM
 *
-* COMP241, Spring 2018
-*
-* Pledge : I have neither given nor received unauthorized aid
-*         on this program.
 *
 * Description : The following code is the implementation of a HashTable and a Quicksort algorithm. The project is based
-				around reading in a text file and counting how often each word occurs 
-				(similar to the movie reviews project). 
+*  around reading in a text file and counting how often each word occurs 
+*				 
 */
 #include <iostream>
 #include <fstream>
@@ -19,6 +15,7 @@
 #include "Hashtable.h"
 
 using namespace std;
+
 // Function declarations for Split,Quicksort and Binary search
 vector<string> split(const string &s, char delim); 
 int DivAux(vector<pair<string, int>> &unst, int top, int bot);
@@ -37,9 +34,9 @@ int main()
 	int htsize;
 	cin >> htsize;
 
-	Hashtable freqHt(htsize);
-	vector<pair<string, int>> freqVec;
-	vector<string> words;
+	Hashtable freqHt(htsize); // Hashtable object
+	vector<pair<string, int>> freqVec; 
+	vector<string> words; // Vector to store all the words read in from the file.
 
 	string filename, line;
 	cout << "What filename do you want to read? ";
@@ -123,17 +120,16 @@ int main()
 	return 0;
 }
 /*Function : binarySearch(vector<pair<string, int>>& inpt, int l, int r, string x)
---------------------
-binary search function to search for a word in the Hashtable and vector and returns th number of times the word has 
-appeared in the Hashtable or Vector.
+----------------------------------------------------------------------------------
+Binary search function to search for a word in the Hashtable and vector.
 Returns : An integer that represents the frequency of a certain word in a vector or Hashtable. or -1 when not
-		 found.
+found.
 */
 int binarySearch(vector<pair<string, int>>& inpt, int l, int r, string x)
 {
 	while (l <= r)
 	{
-		int m = l + (r - l) / 2;
+		int m = l + (r - l) / 2; // finds the middle index of the vector
 
 		// Check if word is present at mid
 		if (inpt[m].first == x)
@@ -148,8 +144,7 @@ int binarySearch(vector<pair<string, int>>& inpt, int l, int r, string x)
 			r = m - 1;
 	}
 
-	// if we reach here, then element was
-	// not present
+	// if we reach here, then element was not present
 	return -1;
 }
 /*Function :DivAux(vector<pair<string, int>>&unst, int top, int bot)
@@ -182,9 +177,9 @@ int DivAux(vector<pair<string, int>>&unst, int top, int bot)
 	unst[pos] = pivot;
 	return pos;
 }
-/*Function :DivAux(vector<pair<string, int>>&unst, int top, int bot)
+/*Function :Quicksort(vector<pair<string, int>>&inpt, int fst, int lst)
 --------------------
-Quicksorts the vector of unsorted elements, or strings.
+Uses a recursive divide and conquer stratergy to split the vector to sub vectors from the pivot element and sort the sub vectors of unsorted elements.
 Returns : None.
 */
 void Quicksort(vector<pair<string, int>> &inpt, int fst, int lst)
